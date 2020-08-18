@@ -45,9 +45,10 @@ export default {
         async submitForm(){
             try{
                 await this.loginUser({login: this.login, password: this.password})
-                if(this.saveLocal){
+                if(window && this.saveLocal){
                     window.localStorage.setItem('token', this.auth.token)
                 }
+                console.log('asdasd')
                 await this.$router.push('/catalog')
             }catch (e) {
                 console.log(e)

@@ -2,11 +2,21 @@
   <v-app>
     <v-content>
       <router-view/>
+      <v-container>
+        <v-snackbar
+          :value="notification.show"
+          :timeout="notification.timeout"
+        >
+          {{notification.text}}
+        </v-snackbar>
+      </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+
   export default {
     created() {
       this.unwatch = this.$store.watch(
@@ -17,6 +27,10 @@
                 }
               }
       )
+    },
+
+    computed: {
+      ...mapState(['notification'])
     },
 
     beforeDestroy() {

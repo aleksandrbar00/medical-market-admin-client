@@ -48,13 +48,22 @@
             show-select
             v-model="selected"
             item-key="id"
-        ></v-data-table>
+        >
+            <template v-slot:item.actions="{ item }">
+                <v-icon
+                        small
+                        @click="deleteBrand(item.id)"
+                >
+                    mdi-delete
+                </v-icon>
+            </template>
+        </v-data-table>
     </v-card>
 </template>
 
 <script>
 import BrandForm from '@/components/feed/forms/BrandForm'
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
     components: {BrandForm},
@@ -78,6 +87,11 @@ export default {
                     sortable: true,
                     value: 'country'
                 },
+                {
+                    text: 'Действия',
+                    sortable: false,
+                    value: 'actions'
+                }
 
             ],
             query: ''
@@ -85,6 +99,9 @@ export default {
     },
     computed: {
         ...mapState(['brands'])
+    },
+    methods: {
+        ...mapActions(['deleteBrand'])
     }
 }
 </script>

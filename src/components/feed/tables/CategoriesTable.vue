@@ -48,12 +48,23 @@
                 show-select
                 v-model="selected"
                 item-key="id"
-        ></v-data-table>
+        >
+            <template v-slot:item.actions="{ item }">
+                <v-icon
+                        small
+                        @click="deleteCategory(item.id)"
+                >
+                    mdi-delete
+                </v-icon>
+            </template>
+        </v-data-table>
     </v-card>
 </template>
 
 <script>
     import CategoryForm from "../forms/CategoryForm"
+    import {mapActions} from "vuex"
+
     export default {
         components: {
             CategoryForm
@@ -74,10 +85,18 @@
                         sortable: true,
                         value: 'title'
                     },
+                    {
+                        text: 'Действия',
+                        sortable: false,
+                        value: 'actions'
+                    }
 
                 ],
                 query: ''
             }
         },
+        methods: {
+            ...mapActions(['deleteCategory'])
+        }
     }
 </script>

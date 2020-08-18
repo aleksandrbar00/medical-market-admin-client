@@ -2,7 +2,7 @@
     <ShopItemsTable
         :items="$store.state.catalog.map((item, index) => ({
             ...item,
-            id: index,
+            id: item.id,
             sex: item.sex === 'man' ? 'муж' : 'жен'
          }))"
     />
